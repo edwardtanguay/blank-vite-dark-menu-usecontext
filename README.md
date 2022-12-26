@@ -12,6 +12,7 @@ This is a simple one-page React site created with Vite that has Typescript and S
 - TypeScript
 - one **Sass** file (`index.css` is deleted)
 - **CLI** to easily create pages (`npm run cp Info` creates info page)
+- this site has **React Router 404 bug fixes** implemented for both Netlify (`public/_redirects` file) and Vercel (`vercel.json` file)
 - *good for any React project since state management such as useContext is useful in any site beyond the simplest demo sites*
 
 ## install
