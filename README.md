@@ -18,18 +18,20 @@ This is a simple one-page React site created with Vite that has Typescript and S
 ## install
 
 - go to your projects directory
-- create your site directory e.g. **site001** by cloning this project 
+  - e.g. `cd ~/projects`
+- in your projects directory, create your new site e.g. **site001** by cloning this project 
   - `git clone git@github.com:edwardtanguay/blank-vite-dark-menu-usecontext.git site001`
 - open your newly created site in VSCode
   - `code site001`
-- open your VSCode terminal
-- delete the connection to this repository
-  - `rm -rd .git`
-- create a new Git repository
+- inside VSCode, open the VSCode terminal
+  - **CTRL-`**
+- delete the connection to this repository by deleting the Git repository
+  - `rm -rf .git`
+- create a new local Git repository
   - `git init -b main`
 - install node_modules
   - `npm i`
-- start your site
+- start your site and click given link to view website
   - `npm run dev`
 
 ## more starters, templates and frameworks
