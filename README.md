@@ -1,4 +1,4 @@
-# Dark Vite Menu with useContext
+# Dark React Site with Menu and useContext
 
 This is a simple one-page React site created with Vite that has Typescript and Sass installed, and with React Router and a CLI that enables you to easily create pages. It also has useContext implemented with an example of loading both static and API data in useContext and using these state variables on two separate pages.
 
@@ -17,11 +17,20 @@ This is a simple one-page React site created with Vite that has Typescript and S
 
 ## install
 
-- download zip
-- copy all files to new directory, e.g. `/home/yourname/projects/site001`
-- open VSCode in that directory (`code .`)
-- `npm i`
-- `npm run dev`
+- go to your projects directory
+- create your site directory e.g. **site001** by cloning this project 
+  - `git clone git@github.com:edwardtanguay/blank-vite-dark-menu-usecontext.git site001`
+- open your newly created site in VSCode
+  - `code site001`
+- open your VSCode terminal
+- delete the connection to this repository
+  - `rm -rd .git`
+- create a new Git repository
+  - `git init -b main`
+- install node_modules
+  - `npm i`
+- start your site
+  - `npm run dev`
 
 ## more starters, templates and frameworks
 
