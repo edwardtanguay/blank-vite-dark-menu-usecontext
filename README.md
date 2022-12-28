@@ -2,7 +2,7 @@
 
 This is a simple one-page React site created with Vite that has Typescript and Sass installed, and with React Router and a CLI that enables you to easily create pages. It also has useContext implemented with an example of loading both static and API data in useContext and using these state variables on two separate pages.
 
-![grafik](https://starters-backend.tanguay.eu/images/starters/blankViteDarkMenuUsecontext.png)
+![grafik](https://starters.tanguay.eu/images/starters/blankViteDarkMenuUsecontext.png)
 
 ## features
 
