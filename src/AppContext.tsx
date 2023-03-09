@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { createContext } from 'react';
 import axios from 'axios';
 import { IJob, ISkill } from './interfaces';
-
+import { useQuery, gql } from '@apollo/client';
 
 const jobsUrl = 'http://localhost:3610/jobs';
 const skillsUrl = 'http://localhost:3610/skills';
@@ -12,6 +12,7 @@ interface IAppContext {
 	dataSource: string;
 	jobs: IJob[];
 	skills: ISkill[];
+	message: string;
 }
 
 interface IAppProvider {
@@ -24,27 +25,44 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const appTitle = 'Info Site';
 	const [jobs, setJobs] = useState<IJob[]>([]);
 	const [skills, setSkills] = useState<ISkill[]>([]);
-	const [dataSource, setDataSource] = useState<string>(import.meta.env.VITE_DATA_SOURCE);
+	const [dataSource, setDataSource] = useState<string>(
+		import.meta.env.VITE_DATA_SOURCE
+	);
+	const [message, setMessage] = useState<string>('');
 
-	useEffect(() => {
-		(async () => {
-			if (dataSource === 'rest') {
-				setJobs((await axios.get(jobsUrl)).data);
-			} else {
-				// graphql
+	const { loading, data } = useQuery(gql`
+		{
+			message,
+			jobs {
+				id,
+				title
+			},
+			skills {
+				idCode,
+				name,
+				description
 			}
-		})();
-	}, []);
+		}
+	`);
+	useEffect(() => {
+		if (!loading) {
+			setMessage(data.message);
+			setJobs(data.jobs);
+			setSkills(data.skills);
+		}
+	}, [loading]);
 
-	useEffect(() => {
-		(async () => {
-			if (dataSource === 'rest') {
-				setSkills((await axios.get(skillsUrl)).data);
-			} else {
-				// graphql
-			}
-		})();
-	}, []);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		setJobs((await axios.get(jobsUrl)).data);
+	// 	})();
+	// }, []);
+
+	// useEffect(() => {
+	// 	(async () => {
+	// 		setSkills((await axios.get(skillsUrl)).data);
+	// 	})();
+	// }, []);
 
 	return (
 		<AppContext.Provider
@@ -52,7 +70,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				appTitle,
 				jobs,
 				skills,
-				dataSource
+				dataSource,
+				message,
 			}}
 		>
 			{children}

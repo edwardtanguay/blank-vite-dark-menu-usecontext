@@ -25,7 +25,7 @@ export const PageInfo = () => {
 					<h2>{skills.length} Skills</h2>
 					{skills.map(skill => {
 						return (
-							<div className="skill" key={skill.name}>
+							<div className="skill" key={skill.idCode}>
 								<div className="item"><span className="name">{skill.name}</span> - {skill.description}</div>
 							</div>
 						)
