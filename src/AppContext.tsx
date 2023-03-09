@@ -9,7 +9,6 @@ const skillsUrl = 'http://localhost:3610/skills';
 
 interface IAppContext {
 	appTitle: string;
-	dataSource: string;
 	jobs: IJob[];
 	skills: ISkill[];
 	message: string;
@@ -25,9 +24,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const appTitle = 'Info Site';
 	const [jobs, setJobs] = useState<IJob[]>([]);
 	const [skills, setSkills] = useState<ISkill[]>([]);
-	const [dataSource, setDataSource] = useState<string>(
-		import.meta.env.VITE_DATA_SOURCE
-	);
 	const [message, setMessage] = useState<string>('');
 
 	const { loading, data } = useQuery(gql`
@@ -70,7 +66,6 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 				appTitle,
 				jobs,
 				skills,
-				dataSource,
 				message,
 			}}
 		>
