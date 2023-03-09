@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AppContext } from './AppContext';
 import './App.scss';
 import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
 import { PageWelcome } from './pages/PageWelcome';
@@ -5,9 +7,11 @@ import { PageInfo } from './pages/PageInfo';
 import { PageAbout } from './pages/PageAbout';
 
 function App() {
+	const { dataSource} = useContext(AppContext);
+
 	return (
 		<div className="App">
-			<h1>Info Site</h1>
+			<h1>Info Site - DATA VIA {dataSource.toUpperCase()}</h1>
 			<nav>
 				<NavLink to="/welcome">Welcome</NavLink>
 				<NavLink to="/info">Info</NavLink>

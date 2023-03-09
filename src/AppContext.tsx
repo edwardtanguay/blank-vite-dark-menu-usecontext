@@ -3,11 +3,13 @@ import { createContext } from 'react';
 import axios from 'axios';
 import { IJob, ISkill } from './interfaces';
 
-const jobsUrl = 'https://edwardtanguay.vercel.app/share/jobs.json';
-const skillsUrl = 'https://edwardtanguay.vercel.app/share/skills.json';
+
+const jobsUrl = 'http://localhost:3610/jobs';
+const skillsUrl = 'http://localhost:3610/skills';
 
 interface IAppContext {
 	appTitle: string;
+	dataSource: string;
 	jobs: IJob[];
 	skills: ISkill[];
 }
@@ -22,16 +24,25 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const appTitle = 'Info Site';
 	const [jobs, setJobs] = useState<IJob[]>([]);
 	const [skills, setSkills] = useState<ISkill[]>([]);
+	const [dataSource, setDataSource] = useState<string>(import.meta.env.VITE_DATA_SOURCE);
 
 	useEffect(() => {
 		(async () => {
-			setJobs((await axios.get(jobsUrl)).data);
+			if (dataSource === 'rest') {
+				setJobs((await axios.get(jobsUrl)).data);
+			} else {
+				// graphql
+			}
 		})();
 	}, []);
 
 	useEffect(() => {
 		(async () => {
-			setSkills((await axios.get(skillsUrl)).data);
+			if (dataSource === 'rest') {
+				setSkills((await axios.get(skillsUrl)).data);
+			} else {
+				// graphql
+			}
 		})();
 	}, []);
 
@@ -40,7 +51,8 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			value={{
 				appTitle,
 				jobs,
-				skills
+				skills,
+				dataSource
 			}}
 		>
 			{children}

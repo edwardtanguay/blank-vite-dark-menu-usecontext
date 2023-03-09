@@ -10,7 +10,14 @@ export const PageWelcome = () => {
 			<Helmet>
 				<title>{appTitle} - Welcome</title>
 			</Helmet>
-			<p>This site has <strong>{jobs.length}</strong> jobs and <strong>{skills.length}</strong> skills.</p>
+
+			<h2>Via REST</h2>
+			<p>
+				This site has <strong>{jobs.length}</strong> jobs and{' '}
+				<strong>{skills.length}</strong> skills.
+			</p>
+			<h2>Via GraphQL</h2>
+			
 		</div>
 	);
 };
