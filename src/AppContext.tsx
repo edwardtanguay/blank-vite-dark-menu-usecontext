@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react';
 import { createContext } from 'react';
 import axios from 'axios';
 import { IJob, ISkill } from './interfaces';
-import { useQuery, gql } from '@apollo/client';
 
-const jobsUrl = 'http://localhost:3610/jobs';
-const skillsUrl = 'http://localhost:3610/skills';
+const jobsUrl = 'https://edwardtanguay.vercel.app/share/jobs.json';
+const skillsUrl = 'https://edwardtanguay.vercel.app/share/skills.json';
 
 interface IAppContext {
 	appTitle: string;
 	jobs: IJob[];
 	skills: ISkill[];
-	message: string;
 }
 
 interface IAppProvider {
@@ -24,49 +22,25 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 	const appTitle = 'Info Site';
 	const [jobs, setJobs] = useState<IJob[]>([]);
 	const [skills, setSkills] = useState<ISkill[]>([]);
-	const [message, setMessage] = useState<string>('');
 
-	const { loading, data } = useQuery(gql`
-		{
-			message,
-			jobs {
-				id,
-				title
-			},
-			skills {
-				idCode,
-				name,
-				description
-			}
-		}
-	`);
 	useEffect(() => {
-		if (!loading) {
-			setMessage(data.message);
-			setJobs(data.jobs);
-			setSkills(data.skills);
-		}
-	}, [loading]);
+		(async () => {
+			setJobs((await axios.get(jobsUrl)).data);
+		})();
+	}, []);
 
-	// useEffect(() => {
-	// 	(async () => {
-	// 		setJobs((await axios.get(jobsUrl)).data);
-	// 	})();
-	// }, []);
-
-	// useEffect(() => {
-	// 	(async () => {
-	// 		setSkills((await axios.get(skillsUrl)).data);
-	// 	})();
-	// }, []);
+	useEffect(() => {
+		(async () => {
+			setSkills((await axios.get(skillsUrl)).data);
+		})();
+	}, []);
 
 	return (
 		<AppContext.Provider
 			value={{
 				appTitle,
 				jobs,
-				skills,
-				message,
+				skills
 			}}
 		>
 			{children}

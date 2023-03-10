@@ -5,7 +5,6 @@ import { PageInfo } from './pages/PageInfo';
 import { PageAbout } from './pages/PageAbout';
 
 function App() {
-
 	return (
 		<div className="App">
 			<h1>Info Site</h1>
